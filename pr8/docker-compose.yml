@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  joomla:
+    image: joomla:latest
+    restart: always
+    links:
+      - joomladb-sakovich:mysql
+    ports:
+      - "8080:80"
+    environment:
+      JOOMLA_DB_HOST: mysql
+      JOOMLA_DB_USER: joomla
+      JOOMLA_DB_PASSWORD: joomla
+      JOOMLA_DB_NAME: joomla
+
+  joomladb-sakovich:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: joomla
+      MYSQL_USER: joomla
+      MYSQL_PASSWORD: joomla
